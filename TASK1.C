@@ -50,6 +50,48 @@ string BlackBoxUnsafe::randomPwd(int l){
 	}
 	return pwd_;
 }
+/*
+string BlackBoxSafe::randomPwd(int l){                     // BlackBox interplentation Felix
+	int symblIdx;
+	if(l < MINIMAL_PWD_LENGTH){
+		l = MINIMAL_PWD_LENGTH;
+	};
+	pwd_ = string("");
+	for(int i=0; i < l; i++){
+		symbolIdx = rand() % lengthSymbArray_;
+		pwd_ += charSymbArray_[symbolIdx];
+	}
+	pwd_ = sha256(pwd_);
+
+	return pwd_;
+}
+
+
+*/
+
+
+void BlackBoxSafe::makePWD(int l){
+	string pwd("");
+	pwd = randomPwd(l);
+	spwd_ = sha256(pwd);
+}
+
+
+string BlackBoxSafe::input(string strPwd){                 //BlackBox interplentation Felix           sollte man hier noch testen ob PWD_ etwas inhalten hat ?
+
+
+	if(spwd_.compare(sha256(strPwd)) == 0){
+		return string("ACCESS ACCEPTED");
+	}
+
+	return string("ACCESS DENIED");
+}
+
+
+
+string BlackBoxSafe::readPWD(){
+	return spwd_ ;
+}
 
 void demoTASK1_00(){
 	string pwd("meinpassword");

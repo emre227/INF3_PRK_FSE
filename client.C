@@ -20,7 +20,7 @@ int main() {
 	string msg;
 
 	//connect to host
-	c.conn(host , 2022);
+	c.conn(host , 2021);
 
 	int i=0;
 	bool goOn=1;

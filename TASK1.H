@@ -105,7 +105,19 @@ class BlackBoxSafe : public BlackBoxUnsafe{
 	/// \todo  Implementation of class BlackBoxSafe needs to be finalized.
 public:
 	BlackBoxSafe(int pwdLength, int symbSetSize) : BlackBoxUnsafe(pwdLength, symbSetSize){;};
-	virtual string input(string strPwd){return string("undefined");};
+
+
+	string input(string strPwd);
+
+	void makePWD(int l);
+	string readPWD();
+
+private:
+
+	string spwd_;
+
+
+
 };
 
 

@@ -56,6 +56,8 @@ string SimFileServer::disturbance(string input){
 
 string HtmlFile::generateDataContent(){
 	/// \todo this method must create a html table with random float values
+
+
 	string content("Hallo Welt!");
 	return content;
 };
