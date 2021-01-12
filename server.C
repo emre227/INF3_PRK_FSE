@@ -44,7 +44,7 @@ int main(){
 	srv.run();
 }
 
-/*
+
 
 
 string myTCPserver::myResponse(string input){
@@ -59,20 +59,20 @@ string myTCPserver::myResponse(string input){
 
 		sscanf(input.c_str(),"NEWBOX[%d,%d]", &a, &b);
 
-		Safe_ = new BlackBoxSafe(a,b);
+		Safe_ = new BlackBoxSafe(5,5);
 
 		Safe_->makePWD(a);
 
 
 		//Safe_->
 
-		response = string("newPWDset");
+		response = string("Newbox");
 
 	}else if(input.compare(0,3,"PSW[") == 0){
 		char pwd[64];
 		sscanf(input.c_str(), "PSW[%s]",pwd);
 		response = Safe_->input(pwd);
-
+		response = string("input");
 	}else{
 
 
@@ -84,6 +84,7 @@ string myTCPserver::myResponse(string input){
 
 	}
 
+
 	return response;
 }
 
@@ -91,12 +92,12 @@ string myTCPserver::myResponse(string input){
 
 
 
-*/
 
 
 
 
 
+/*
 
 //  hat schon mal funktioniert
 
@@ -113,8 +114,10 @@ string myTCPserver::myResponse(string input){
 
 
 /*  Versuch Nummer zwei aus Praktikum 2
- *
- *  string myTCPserver::myResponse(string input){
+
+
+
+   string myTCPserver::myResponse(string input){
 
 
 	string response("UNKNOWN Command");
@@ -158,11 +161,9 @@ string myTCPserver::myResponse(string input){
 	return response;
 
 }
- *
- *
- */
 
 
+*/
 
 
 

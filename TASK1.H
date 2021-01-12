@@ -109,7 +109,7 @@ public:
 
 	string input(string strPwd);
 
-	void makePWD(int l);
+	string makePWD(int l);
 	string readPWD();
 
 private:

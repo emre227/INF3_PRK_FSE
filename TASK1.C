@@ -70,10 +70,13 @@ string BlackBoxSafe::randomPwd(int l){                     // BlackBox interplen
 */
 
 
-void BlackBoxSafe::makePWD(int l){
+string BlackBoxSafe::makePWD(int l){
 	string pwd("");
 	pwd = randomPwd(l);
 	spwd_ = sha256(pwd);
+	pwd = ("new Passwort");
+
+	return pwd;
 }
 
 
