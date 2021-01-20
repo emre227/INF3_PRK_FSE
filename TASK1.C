@@ -57,7 +57,7 @@ string BlackBoxSafe::input(string strPwd){                 //BlackBox interplent
 
 	string sumPwd = sha256(strPwd);					    //wandelt das PW in die check sum um
 
-	if(sumPwd.compare(sha256(pwd_)) == 0){
+	if(sumPwd.compare(sha256(pwd_)) == 0){				//Pw vom
 		return string("ACCESS ACCEPTED");
 	}
 

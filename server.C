@@ -62,7 +62,8 @@ string myTCPserver::myResponse(string input){
 		Safe_ = new BlackBoxSafe(a,b);
 
 
-		response = Safe_->readPwd();
+		response = string("password set");
+		//response = Safe_->readPwd();			//psw ausgabe
 
 	}else if(input.compare(0,4,"PSW[") == 0){
 		char pwd[32];
