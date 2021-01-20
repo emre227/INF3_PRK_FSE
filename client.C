@@ -29,13 +29,13 @@ int main() {
 			msg = string("BYEBYE");
 			goOn = 0;
 		}else{
-			msg = string("client wants this");
+			msg = string("NEWBOX[%d,%d]",4,4);
 		}
 		cout << "client sends:" << msg << endl;
 		c.sendData(msg);
 		msg = c.receive(32);
 		cout << "got response:" << msg << endl;
-		sleep(1);
+
 
 	}
 }

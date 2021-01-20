@@ -59,29 +59,23 @@ string myTCPserver::myResponse(string input){
 
 		sscanf(input.c_str(),"NEWBOX[%d,%d]", &a, &b);
 
-		Safe_ = new BlackBoxSafe(5,5);
-
-		Safe_->makePWD(a);
+		Safe_ = new BlackBoxSafe(a,b);
 
 
-		//Safe_->
+		response = Safe_->readPwd();
 
-		response = string("Newbox");
+	}else if(input.compare(0,4,"PSW[") == 0){
+		char pwd[32];
+		sscanf(input.c_str(), "PSW[%s",pwd);
 
-	}else if(input.compare(0,3,"PSW[") == 0){
-		char pwd[64];
-		sscanf(input.c_str(), "PSW[%s]",pwd);
+
 		response = Safe_->input(pwd);
-		response = string("input");
+
+
+
 	}else{
 
-
 		response = string(" UNKNOWN COMMAND");
-
-
-
-
-
 	}
 
 
