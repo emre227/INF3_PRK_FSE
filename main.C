@@ -23,11 +23,13 @@
 #include "TASK5.H"
 #include "TASK6.H"
 
+
 using namespace std;
 
 
 int main(){
 	srand(time(nullptr));
+
 
     return 0;
 }

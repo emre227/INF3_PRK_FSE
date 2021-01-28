@@ -26,10 +26,10 @@ int main() {
 	string msg;
 
 	//connect to host
-	c.conn(host , 20223);
+	c.conn(host , 20233);
 
-	int pl = 4;
-	int al = 3;
+	int pl = 5;
+	int al = 6;
 	string res("");
 	cout << "asking server to create a password" << endl;
 	res =askNewbox(&c,pl,al);
@@ -39,7 +39,7 @@ int main() {
 	int counter;
 	counter = guessPsw(&c,pl,al);
 
-	cout << "guesed the password with" << counter << " tries" << endl;
+	cout << "guesed the password with  " << counter << " tries" << endl;
 	}
 
 

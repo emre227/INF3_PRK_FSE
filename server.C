@@ -39,7 +39,7 @@ protected:
 // 2022 =  port number
 int main(){
 	srand(time(nullptr));
-	myTCPserver srv(20223,25);
+	myTCPserver srv(20233,25);
 
 	srv.run();
 }
