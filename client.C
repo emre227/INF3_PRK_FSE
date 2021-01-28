@@ -8,9 +8,9 @@
 #include <string>
 #include <iostream>
 #include <unistd.h> //contains various constants
-#include <sstream> //für stringstream
+#include <sstream> 	//für stringstream
 #include <math.h>
-
+#include <fstream> 	// bibliothek um in dateien zu schreiben
 
 #include "SIMPLESOCKET.H"
 
@@ -28,18 +28,29 @@ int main() {
 	//connect to host
 	c.conn(host , 20233);
 
-	int pl = 5;
-	int al = 6;
-	string res("");
+	int pl = 4;												//passwordlänge
+	int al = 4;												//alphabetlänge
+	string res("");											//string wo die antwort des server gespeichert wird
 	cout << "asking server to create a password" << endl;
-	res =askNewbox(&c,pl,al);
+	res = askNewbox(&c,pl,al);								//ruft die funktion zum erstellen eines pws auf
 
-	if(res.compare(0,11,"password set")){		//client bekommt die antwort vom server das ein pw erfolgreich erstellt wurde
+	if(res.compare(0,11,"password set")){					//client bekommt die antwort vom server das ein pw erfolgreich erstellt wurde
 
-	int counter;
+	int counter;											//zählt die versuche das pw zu raten
 	counter = guessPsw(&c,pl,al);
 
-	cout << "guesed the password with  " << counter << " tries" << endl;
+	cout << "guesed the password with " << counter << " tries" << endl;
+
+	ofstream file("statistik.csv",ofstream::app);			//erzeugt die datei "statistik"
+
+
+	//file << "Passwortlänge	Alphabetlänge	Versuche" << endl;   //erstmal auskommentiert, braucht man nur bei erstmaliger dateierzeugung
+	file << pl << "	" << al << "	" << counter << "	" <<endl;
+
+
+
+	file.close();											//schließt die datei
+
 	}
 
 
@@ -54,8 +65,6 @@ int main() {
 
 
 	}
-
-
 
 //soll dann server dazu bringen ein pw zu erstellen
 string askNewbox(TCPclient *c, int pl, int al){    // pl-> password länge al-> alphabet länge(also wie viele versch. zeichen)
@@ -75,9 +84,9 @@ string askNewbox(TCPclient *c, int pl, int al){    // pl-> password länge al-> 
 
 
 
-int guessPsw(TCPclient *c, int pl, int al){	//versucht das password über bruteforce zu erraten
-
-	const string SYMBOLS = "ABCDEFGHIJKLMNOPQRTSTUVWXYZabcdefghijklmopqrstuvwxyz0123456789";
+int guessPsw(TCPclient *c, int pl, int al){						//int als rückgabe, wei die anzahl der versuche zurück gegeben werden
+																//versucht das password über bruteforce zu erraten
+	const string SYMBOLS = "ABCDEFGHIJKLMNOPQRTSTUVWXYZabcdefghijklmopqrstuvwxyz0123456789";	//mögliches alphabet
 	char symbArray[al];
 	string pwdIdee,response;
 	int m=0;

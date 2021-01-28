@@ -49,117 +49,35 @@ int main(){
 
 string myTCPserver::myResponse(string input){
 
-	string response("unknown Command");
-
-	bool success = false;
-	int a,b;
-
-	if(input.compare(0,7,"NEWBOX[")== 0){
+	string response("unknown command");    					//falls eine unbekannt eingabe vom client kommt
 
 
-		sscanf(input.c_str(),"NEWBOX[%d,%d]", &a, &b);
+	int pl,al;												// pl= passwordlänge und alphabetlänge => wird vom client gesendet
 
-		Safe_ = new BlackBoxSafe(a,b);
+	if(input.compare(0,7,"NEWBOX[")== 0){					//überprüft ob der client einen password erstellen will
+															//input.compare guckt ob die ersten 7 Zeilen übereinstimmen
+
+		sscanf(input.c_str(),"NEWBOX[%d,%d]", &pl, &al);	//scanned string und speichert die vom client gesendeten variablen
+
+		Safe_ = new BlackBoxSafe(pl,al);					//erstellt objekt safe auf der halde ->password wird so erstellt
 
 
-		response = string("password set");
-		//response = Safe_->readPwd();			//psw ausgabe
+		response = string("password set");					//gibt dem client zurück das ein password erstellt wurde
+		//response = Safe_->readPwd();						//psw ausgabe für tests
 
-	}else if(input.compare(0,4,"PSW[") == 0){
-		char pwd[32];
+	}else if(input.compare(0,4,"PSW[") == 0){				//prüft ob der befehl zum passwordeinlesen gesendet wurde
+		char pwd[32];										//erstellt ein char wo das vom client gesendete password gesenet wird
 		sscanf(input.c_str(), "PSW[%s",pwd);
 
 
-		response = Safe_->input(pwd);
-
-
-
-	}else{
-
-		response = string(" UNKNOWN COMMAND");
+		response = Safe_->input(pwd);						//gibt das password in die methode von safe
+															//input() vergleicht das gesendete pw von dem vom server
+															//input() hat als rückgabe einen string
+															//entweder "accepted" oder "denied"
 	}
 
-
-	return response;
+	return response;										//ausgabe der antwort des servers, abhängig vom client befehl
 }
-
-
-
-
-
-
-
-
-
-
-/*
-
-//  hat schon mal funktioniert
-
-string myTCPserver::myResponse(string input){
-	string response("UNKNOWN Command");
-	if(input.compare(0,3,"ABC") ==0 ){
-			response = string ("..Die Katze lief im schnee.");
-
-	};
-
-	return response;
-
-}
-
-
-/*  Versuch Nummer zwei aus Praktikum 2
-
-
-
-   string myTCPserver::myResponse(string input){
-
-
-	string response("UNKNOWN Command");
-	bool success = false;
-	int a,b;
-
-
-	if(input.compare(0,4,"PSW[") == 0 ){
-		// password received
-
-		char pwd[32];
-
-		sscanf(input.c_str(), "PSW[%s]",pwd);
-
-		pwd[input.size() - 5]= '\0';
-
-		cout << "pwd receided :" << pwd << "'" << endl;
-
-		success = rand()%2;
-
-
-		if(success){
-			response = string ("SUCCESS");
-
-		}else{
-			response = string("FAILED");
-
-		}
-	}else if(input.compare(0,7,"NEWBOX[")== 0){
-
-		sscanf(input.c_str(),"NEWBOX[%d,%d]", &a, &b);
-
-		response = string("OKAY");
-
-
-	}else{
-		response = string(" UNKNOWN COMMAND");
-
-	}
-
-	return response;
-
-}
-
-
-*/
-
 
 
 
