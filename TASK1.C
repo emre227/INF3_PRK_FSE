@@ -35,9 +35,9 @@ BlackBoxUnsafe::BlackBoxUnsafe(int pwdLength, int symbSetSize){
 
 string BlackBoxUnsafe::input(string strPwd){
 	if(strPwd.compare(pwd_) == 0){
-		return string("ACCESS ACCEPTED");
+		return string("ACCEPTED");
 	}
-	return string("ACCESS DENIED");
+	return string("DENIED");
 }
 
 string BlackBoxUnsafe::randomPwd(int l){
@@ -54,14 +54,14 @@ string BlackBoxUnsafe::randomPwd(int l){
 
 string BlackBoxSafe::input(string strPwd){                 //BlackBox interplentation Felix           sollte man hier noch testen ob PWD_ etwas inhalten hat ?
 														// hab hier paar änderungen gemacht
-
-	string sumPwd = sha256(strPwd);					    //wandelt das PW in die check sum um
-
-	if(sumPwd.compare(sha256(pwd_)) == 0){				//Pw vom
-		return string("ACCESS ACCEPTED");
+	cout << "pwd_  " << pwd_ << endl;
+	string sumPwd = strPwd;					    //wandelt das PW in die check sum um
+	cout << " sumPwd " << sumPwd << endl;
+	if(sumPwd.compare(pwd_) == 0){				//Pw vom
+		return string("ACCEPTED");
 	}
 
-	return string("ACCESS DENIED");
+	return string("DENIED1");
 }
 
 

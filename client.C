@@ -9,6 +9,8 @@
 #include <iostream>
 #include <unistd.h> //contains various constants
 #include <sstream> //für stringstream
+#include <math.h>
+
 
 #include "SIMPLESOCKET.H"
 
@@ -24,10 +26,10 @@ int main() {
 	string msg;
 
 	//connect to host
-	c.conn(host , 2021);
+	c.conn(host , 20223);
 
-	int pl = 5;
-	int al = 5;
+	int pl = 4;
+	int al = 3;
 	string res("");
 	cout << "asking server to create a password" << endl;
 	res =askNewbox(&c,pl,al);
@@ -35,7 +37,7 @@ int main() {
 	if(res.compare(0,11,"password set")){		//client bekommt die antwort vom server das ein pw erfolgreich erstellt wurde
 
 	int counter;
-	counter = guessPsw(c,pl,al);
+	counter = guessPsw(&c,pl,al);
 
 	cout << "guesed the password with" << counter << " tries" << endl;
 	}
@@ -43,6 +45,8 @@ int main() {
 
 
 	else{ // für den fall das der client das password nicht erzeugt hat
+		
+		cout << "fehler"<< endl;
 		return 0;
 
 	}
@@ -74,14 +78,52 @@ string askNewbox(TCPclient *c, int pl, int al){    // pl-> password länge al-> 
 int guessPsw(TCPclient *c, int pl, int al){	//versucht das password über bruteforce zu erraten
 
 	const string SYMBOLS = "ABCDEFGHIJKLMNOPQRTSTUVWXYZabcdefghijklmopqrstuvwxyz0123456789";
-	int pwArray[pl];
+	char symbArray[al];
+	string pwdIdee,response;
+	int m=0;
+	int index;
+	pwdIdee =string("");
 
-	//hier ist noch viel zu machen :D
-	while(){
 
-
-
+	
+	
+	for(int i=0;i<al;i++){
+		symbArray[i] = SYMBOLS.at(i);
 	}
+	
+	//hier ist noch viel zu machen :D
+
+	if(pl > 0){
+		for(int i=0;i < pl;i++){
+			pwdIdee += symbArray[0];
+		}
+
+		do{
+			for(int i=0;i<pl;i++){
+				if(i==0){
+					pwdIdee.replace(i,1,1,symbArray[int(m % al)]);
+				}else{
+					index = (m / int(pow(float(al),float(i)))) % al;
+
+					pwdIdee.replace(i,1,1,symbArray[index]);
+				}
+			}
+			response = string();
+			response = "PSW[";
+			response += pwdIdee;
+	
+			cout << response << endl;
+					
+			c->sendData(response);
+	
+			response = c->receive(32);
+			cout << response << endl;
+			m++;
+
+		}while(response.compare("ACCEPTED") != 0);
+
+
+	return int(m + 1);
 
 
 
@@ -89,6 +131,7 @@ int guessPsw(TCPclient *c, int pl, int al){	//versucht das password über brutef
 
 }
 
+return -1;
 
 
 }
