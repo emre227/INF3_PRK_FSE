@@ -63,7 +63,7 @@ string myTCPserver::myResponse(string input){
 
 
 		response = string("password set");					//gibt dem client zurück das ein password erstellt wurde
-		//response = Safe_->readPwd();						//psw ausgabe für tests
+
 
 	}else if(input.compare(0,4,"PSW[") == 0){				//prüft ob der befehl zum passwordeinlesen gesendet wurde
 		char pwd[32];										//erstellt ein char wo das vom client gesendete password gesenet wird

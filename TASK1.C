@@ -52,15 +52,12 @@ string BlackBoxUnsafe::randomPwd(int l){
 }
 
 
-string BlackBoxSafe::input(string strPwd){                 //BlackBox interplentation Felix           sollte man hier noch testen ob PWD_ etwas inhalten hat ?
-														// hab hier paar änderungen gemacht
+string BlackBoxSafe::input(string strPwd){
+
 	
-	//cout << "pwd_  " << pwd_ << endl;
 	string sumPwd = sha256(strPwd);					    //wandelt das PW in die check sum um
-	//
 	
-	cout << " sumPwd " << sumPwd << endl;
-	if(sumPwd.compare(sha256(pwd_)) == 0){				//Pw vom
+	if(sumPwd.compare(sha256(pwd_)) == 0){				//vergleicht sum vom client pw mit sum von server pw
 		return string("ACCEPTED");
 	}
 
@@ -68,11 +65,6 @@ string BlackBoxSafe::input(string strPwd){                 //BlackBox interplent
 }
 
 
-
-string BlackBoxSafe::readPwd(){				//nur zum pw rauslesen
-
-	return pwd_;
-}
 
 
 
