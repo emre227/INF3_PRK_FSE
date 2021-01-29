@@ -96,13 +96,13 @@ int guessPsw(TCPclient *c, int pl, int al){						//int als rückgabe, wei die an
 
 	
 	
-	for(int i=0;i<al;i++){
+	for(int i=0;i<al;i++){                     					// Symbole in Array
 		symbArray[i] = SYMBOLS.at(i);
 	}
 	
 	//hier ist noch viel zu machen :D
 
-	if(pl > 0){
+	if(pl > 0){													//erster Passwort string versuch
 		for(int i=0;i < pl;i++){
 			pwdIdee += symbArray[0];
 		}
@@ -110,22 +110,22 @@ int guessPsw(TCPclient *c, int pl, int al){						//int als rückgabe, wei die an
 		do{
 			for(int i=0;i<pl;i++){
 				if(i==0){
-					pwdIdee.replace(i,1,1,symbArray[int(m % al)]);
+					pwdIdee.replace(i,1,1,symbArray[int(m % al)]);              // erste stelle im string laueft bis al und wiederholt sich ab da
 				}else{
-					index = (m / int(pow(float(al),float(i)))) % al;
+					index = (m / int(pow(float(al),float(i)))) % al;            // zaehlt immer al einen hoch bei jeder stelle
 
 					pwdIdee.replace(i,1,1,symbArray[index]);
 				}
 			}
-			response = string();
+			response = string();                                                // string zum server wird vorbereitet
 			response = "PSW[";
 			response += pwdIdee;
 	
 			cout << response << endl;
 					
-			c->sendData(response);
+			c->sendData(response);                                             // string passwort senden an server
 	
-			response = c->receive(32);
+			response = c->receive(32);                                         // antwort vom server
 			cout << response << endl;
 			m++;
 
