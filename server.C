@@ -65,7 +65,7 @@ string myTCPserver::myResponse(string input){
 		response = string("password set");					//gibt dem client zurück das ein password erstellt wurde
 
 
-	}else if(input.compare(0,4,"PSW[") == 0){				//prüft ob der befehl zum passwordeinlesen gesendet wurde
+	}else if(input.compare(0,4,"PSW[") == 0){				//prüft ob der befehl zum password einlesen gesendet wurde
 		char pwd[32];										//erstellt ein char wo das vom client gesendete password gesenet wird
 		sscanf(input.c_str(), "PSW[%s",pwd);
 

@@ -55,7 +55,7 @@ string BlackBoxUnsafe::randomPwd(int l){
 string BlackBoxSafe::input(string strPwd){
 
 	
-	string sumPwd = sha256(strPwd);					    //wandelt das PW in die check sum um
+	string sumPwd = sha256(strPwd);					    //wandelt das pw in die check sum um
 	
 	if(sumPwd.compare(sha256(pwd_)) == 0){				//vergleicht sum vom client pw mit sum von server pw
 		return string("ACCEPTED");
