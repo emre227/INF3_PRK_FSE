@@ -58,11 +58,11 @@ int main() {
 	else{ // für den fall das der client das password nicht erzeugt hat
 		
 		cout << "fehler"<< endl;
-		return 0;
+
 
 	}
 
-
+	return 0;
 
 	}
 
